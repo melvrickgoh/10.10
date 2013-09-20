@@ -7,9 +7,26 @@ createTri(1)-> " 1 " createTri(2)-> " 1 1 1 " createTri(5)-> " 1 1 1 1 2 1 1 3 3
 */
 public class QuestionThree{
 	public static String createTri(int row){
-		String triangle=" ";
-		
+		int N = row;
+        int[][] pascal  = new int[N+1][];
 
+        // initialize first row
+        pascal[1] = new int[1 + 2];
+        pascal[1][1] = 1;
+
+        // fill in Pascal's triangle
+        for (int i = 2; i <= N; i++) {
+            pascal[i] = new int[i + 2];
+            for (int j = 1; j < pascal[i].length - 1; j++)
+                pascal[i][j] = pascal[i-1][j-1] + pascal[i-1][j];
+        }
+		String triangle=" ";
+        // print results
+        for (int i = 1; i <= N; i++) {
+            for (int j = 1; j < pascal[i].length - 1; j++) {
+                triangle+=pascal[i][j] + " ";
+            }
+        }
 		return triangle;
 	}
 }
